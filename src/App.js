@@ -19,7 +19,7 @@ class Racing {
 
     //인스턴스화
     let carInstances = nameArray.map(name => new Car(name));
-    
+
     //전진 카운트 
     for (let i = 0; i < Num; i++){
       Console.print(`i:${i}`);
@@ -34,17 +34,25 @@ class Racing {
     }
     return carInstances;
   }
+
+  static winner(){
+
+  }
 }
 
 
-
 class App {
-  //입력 받기 
   async run() {
+    //입력 받기 
     const inputName = await Console.readLineAsync("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분): ");
     const inputNum = await Console.readLineAsync("시도할 횟수는 몇 회인가요?: ");
+    const cars = Racing.AdvanceCount(inputName,inputNum);
 
-    Console.print(Racing.AdvanceCount(inputName,inputNum));
+    //출력
+    Console.print('실행 결과');
+    for (let i = 0; i < cars.length; i++){
+      Console.print(`${cars[i].name} : ${'-'.repeat(cars[i].count)}`);
+    }
   }
 }
 
