@@ -8,6 +8,10 @@ class Car {
 }
 
 class Racing {
+  constructor() {
+    this.carInstances = [];
+  }
+
   static AdvanceCount(Names,Num){
     //전처리 
     let tempArray = [];
@@ -18,25 +22,30 @@ class Racing {
     nameArray = tempArray;
 
     //인스턴스화
-    let carInstances = nameArray.map(name => new Car(name));
+    this.carInstances = nameArray.map(name => new Car(name));
 
     //전진 카운트 
     for (let i = 0; i < Num; i++){
       Console.print('');
-        for (let j = 0; j < carInstances.length; j++){
+        for (let j = 0; j < this.carInstances.length; j++){
           const randomNum = Random.pickNumberInRange(0, 9);
           const advance = ( randomNum >= 4) ? true : false;
           if (advance){
-            carInstances[j].count++;
+            this.carInstances[j].count++;
           }
-          Console.print(`${carInstances[j].name} : ${'-'.repeat(carInstances[j].count)}`);
+          Console.print(`${this.carInstances[j].name} : ${'-'.repeat(this.carInstances[j].count)}`);
         }
     }
-    return carInstances;
+    return this.carInstances;
   }
 
   static winner(){
-
+    //가장 큰 값 찾기
+    const maxValue = Math.max(...this.carInstances.map(itemm => itemm.count)); 
+    //가장 큰 값과 같은 값을 가진 CarName 만 추출
+    const maxCarNames = this.carInstances.filter(item => item.count === maxValue).map(item => item.name); 
+    
+    return maxCarNames;
   }
 }
 
@@ -50,6 +59,7 @@ class App {
     //출력
     Console.print('실행 결과');
     Racing.AdvanceCount(inputName,inputNum);
+    Console.print(`최종 우승자 : ${Racing.winner().join(', ')}`);
   }
 }
 
