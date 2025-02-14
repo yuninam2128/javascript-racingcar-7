@@ -46,8 +46,14 @@
     b. 우승자 저장 
 
 ## MVC 패턴 
+src/
+│
+├── App.js             # Controller (App 클래스)
+├── Model.js           # Model (Car, Racing 클래스)
+├── View.js            # View (출력 및 사용자 인터페이스 담당)
+└── index.js           # 애플리케이션 시작점
 
-### Main
-### Model (Data)
-### View (UI)
-### Controller (Interface)
+### Model (Data) - Car, Racing
+### View (UI) - Console 입출력 
+### Controller (Interface) - App 
+
